@@ -1,7 +1,8 @@
-import graph.Graph;
+import graph.DS;
+
 public class Main {
     public void main() {
-        Graph graph = new Graph();
+        DS graph = new DS();
         graph.addVertex(1);
         graph.addVertex(2);
         graph.addVertex(3);

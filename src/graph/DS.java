@@ -1,6 +1,7 @@
 package graph;
+import model.Vertex;
 
-public class Graph {
+public class DS {
     class Vertex {
         int key;
         Vertex next;
@@ -26,7 +27,7 @@ public class Graph {
 
     Vertex ls;
 
-    public Graph() {
+    public DS() {
         ls = null;
     }
 
