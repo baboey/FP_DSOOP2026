@@ -13,8 +13,9 @@ public class Vertex {
     }
 
     public void addEdge(int dst, int weight) {
+        if (hasEdge(dst) == true)
+            return;
         Edge newe = new Edge(dst, weight);
-
         if (ls == null)
             ls = newe;
         else {
@@ -23,9 +24,17 @@ public class Vertex {
         }
     }
 
-    public void printEdges() {
+    public void printEdge() {
         for (Edge i = ls; i != null; i = i.next) {
             System.out.println(i.dst + " - " + i.weight);
         }
+    }
+
+    public boolean hasEdge(int dst) {
+        for (Edge i = ls; i != null; i = i.next) {
+            if (i.dst == dst)
+                return true;
+        }
+        return false;
     }
 }

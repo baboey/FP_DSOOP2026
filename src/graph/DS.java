@@ -12,7 +12,6 @@ public class DS {
         if (findVertex(key) != null)
             return;
         Vertex newv = new Vertex(key);
-
         if (ls == null) 
             ls = newv;
         else {
@@ -21,7 +20,7 @@ public class DS {
         }
     }
 
-    public void printVertices() {
+    public void printVertex() {
         for (Vertex i = ls; i != null; i = i.next) {
             System.out.println(i.key);
         }
