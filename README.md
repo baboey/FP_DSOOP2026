@@ -1,5 +1,5 @@
-# Final Project Struktur Data
-### Kelas A Kelompok 06
+# Final Project Struktur Data (A)
+### Kelompok 06
 | Nama                          | NRP         |
 | --:                           | :--         |
 | Sean Arthur Tamajaya          | 5027251050  |
@@ -9,4 +9,3 @@
 | Thio Billy Amansyah           | 5027231007  |
 
 ### Opsi 2: Emergency Evacuation System
-
