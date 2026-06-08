@@ -1,9 +1,10 @@
 package model;
 
 public class Edge {
-    int weight;
+    int dst, weight;
     Edge next;
-    Edge(int w) {
+    Edge(int s, int d, int w) {
+        this.dst = d;
         this.weight = w;
         next = null;
     }

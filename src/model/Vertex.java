@@ -2,11 +2,11 @@ package model;
 import model.Edge;
 
 public class Vertex {
-    int key;
-    Vertex next;
-    Edge ls;
+    public int key;
+    public Vertex next;
+    public Edge ls;
 
-    Vertex(int k) {
+    public Vertex(int k) {
         this.key = k;
         next = null;
         ls = null;

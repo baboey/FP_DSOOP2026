@@ -2,30 +2,7 @@ package graph;
 import model.Vertex;
 
 public class DS {
-    class Vertex {
-        int key;
-        Vertex next;
-        Edge ls;
-
-        Vertex(int k) {
-            this.key = k;
-            next = null;
-            ls = null;
-        }
-
-        class Edge {
-            int weight;
-            Edge next;
-            Edge(int w) {
-                this.weight = w;
-                next = null;
-            }
-        }
-
-
-    }
-
-    Vertex ls;
+    private Vertex ls;
 
     public DS() {
         ls = null;
@@ -47,8 +24,5 @@ public class DS {
             System.out.println(i.key);
         }
     }
-
-    // addvertex(k)
-    // addedge(src, dst)
 }
 
