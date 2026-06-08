@@ -39,4 +39,28 @@ public class DS {
         if (match != null)
             match.addEdge(dst, weight);
     }
+
+    public void deleteVertex(int key) {
+        Vertex i, j;
+        i = ls;
+        j = null;
+        while (i != null) {
+            if (i.key == key) {
+                if (j != null)
+                    j.next = i.next;
+                else
+                    ls = i.next;
+                i = null;
+                return;
+            }
+            j = i;
+            i = i.next;
+        }
+    }
+
+    public void deleteEdge(int src, int dst) {
+        Vertex match = findVertex(src);
+        if (match != null)
+            match.deleteEdge(dst);
+    }
 }

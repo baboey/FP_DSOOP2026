@@ -13,7 +13,7 @@ public class Vertex {
     }
 
     public void addEdge(int dst, int weight) {
-        if (hasEdge(dst) == true)
+        if (findEdge(dst) != null)
             return;
         Edge newe = new Edge(dst, weight);
         if (ls == null)
@@ -30,11 +30,29 @@ public class Vertex {
         }
     }
 
-    public boolean hasEdge(int dst) {
+    public Edge findEdge(int dst) {
         for (Edge i = ls; i != null; i = i.next) {
             if (i.dst == dst)
-                return true;
+                return i;
         }
-        return false;
+        return null;
+    }
+
+    public void deleteEdge(int dst) {
+        Edge i, j;
+        i = ls;
+        j = null;
+        while (i != null) {
+            if (i.dst == dst) {
+                if (j != null)
+                    j.next = i.next;
+                else
+                    ls = i.next;
+                i = null;
+                return;
+            }
+            j = i;
+            i = i.next;
+        }
     }
 }
