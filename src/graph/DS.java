@@ -9,6 +9,8 @@ public class DS {
     }
 
     public void addVertex(int key) {
+        if (findVertex(key) != null)
+            return;
         Vertex newv = new Vertex(key);
 
         if (ls == null) 
