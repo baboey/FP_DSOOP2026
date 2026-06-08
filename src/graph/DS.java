@@ -19,10 +19,23 @@ public class DS {
         }
     }
 
-    public void printVertex() {
+    public void printVertices() {
         for (Vertex i = ls; i != null; i = i.next) {
             System.out.println(i.key);
         }
     }
-}
 
+    public Vertex findVertex(int key) {
+        for (Vertex i = ls; i != null; i = i.next) {
+            if (i.key == key)
+                return i;
+        }
+        return null;
+    }
+
+    public void addEdge(int src, int dst, int weight) {
+        Vertex match = findVertex(src);
+        if (match != null)
+            match.addEdge(dst, weight);
+    }
+}

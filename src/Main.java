@@ -7,6 +7,11 @@ public class Main {
         graph.addVertex(2);
         graph.addVertex(3);
         graph.addVertex(4);
-        graph.printVertex();
+        graph.printVertices();
+
+        graph.addEdge(2,3,100);
+        graph.addEdge(2,1,100);
+        graph.addEdge(2,4,100);
+        graph.findVertex(2).printEdges();
     }
 }
