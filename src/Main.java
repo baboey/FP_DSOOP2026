@@ -76,7 +76,7 @@ public class Main {
                     dst = Integer.toString(rand);
 
                     // prevents duplicates
-                    if (src == dst || dst == pdst) { 
+                    if (src.equals(dst) || dst.equals(pdst)) { 
                         --k;
                         continue;
                     }
