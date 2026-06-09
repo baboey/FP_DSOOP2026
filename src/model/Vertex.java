@@ -12,6 +12,7 @@ public class Vertex {
         ls = null;
     }
 
+    // TODO: add if-else for different weight on same edge
     public void addEdge(int dst, int weight) {
         if (findEdge(dst) != null)
             return;
@@ -48,11 +49,14 @@ public class Vertex {
                     j.next = i.next;
                 else
                     ls = i.next;
-                i = null;
                 return;
             }
             j = i;
             i = i.next;
         }
+    }
+
+    public void deleteAllEdge() {
+        ls = null;
     }
 }

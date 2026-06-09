@@ -35,9 +35,10 @@ public class DS {
     }
 
     public void addEdge(int src, int dst, int weight) {
-        Vertex match = findVertex(src);
-        if (match != null)
-            match.addEdge(dst, weight);
+        Vertex matchSrc = findVertex(src);
+        Vertex matchDst = findVertex(dst);
+        if (matchSrc != null && matchDst != null)
+            matchSrc.addEdge(dst, weight);
     }
 
     public void deleteVertex(int key) {
@@ -46,11 +47,11 @@ public class DS {
         j = null;
         while (i != null) {
             if (i.key == key) {
+                i.deleteAllEdge();
                 if (j != null)
                     j.next = i.next;
                 else
                     ls = i.next;
-                i = null;
                 return;
             }
             j = i;
