@@ -72,4 +72,7 @@ public class DS {
             match.deleteEdge(dst);
         return;
     }
+
+    // TODO: BFS traversal
+    // TODO: bash script to generate 25 vertexes and 40 edges
 }

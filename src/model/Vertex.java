@@ -17,7 +17,6 @@ public class Vertex {
         // Update when there is a matching edge with diff weight val
         if (match != null && match.weight != weight) {
             match.weight = weight;
-        // Insert when there arent any matching edges
         } else if (match == null) {
             Edge newe = new Edge(dst, weight);
             if (ls == null)
