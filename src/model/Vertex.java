@@ -12,23 +12,29 @@ public class Vertex {
         ls = null;
     }
 
-    // TODO: add if-else for different weight on same edge
     public void addEdge(int dst, int weight) {
-        if (findEdge(dst) != null)
-            return;
-        Edge newe = new Edge(dst, weight);
-        if (ls == null)
-            ls = newe;
-        else {
-            newe.next = ls;
-            ls = newe;
+        Edge match = findEdge(dst);
+        // Update when there is a matching edge with diff weight val
+        if (match != null && match.weight != weight) {
+            match.weight = weight;
+        // Insert when there arent any matching edges
+        } else if (match == null) {
+            Edge newe = new Edge(dst, weight);
+            if (ls == null)
+                ls = newe;
+            else {
+                newe.next = ls;
+                ls = newe;
+            }
         }
+        return;
     }
 
     public void printEdge() {
         for (Edge i = ls; i != null; i = i.next) {
-            System.out.println(i.dst + " - " + i.weight);
+            System.out.println(key + " - " + i.dst + " (" + i.weight + ")");
         }
+        return;
     }
 
     public Edge findEdge(int dst) {
@@ -54,9 +60,6 @@ public class Vertex {
             j = i;
             i = i.next;
         }
-    }
-
-    public void deleteAllEdge() {
-        ls = null;
+        return;
     }
 }

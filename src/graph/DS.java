@@ -18,12 +18,14 @@ public class DS {
             newv.next = ls;
             ls = newv;
         }
+        return;
     }
 
     public void printVertex() {
         for (Vertex i = ls; i != null; i = i.next) {
             System.out.println(i.key);
         }
+        return;
     }
 
     public Vertex findVertex(int key) {
@@ -37,8 +39,13 @@ public class DS {
     public void addEdge(int src, int dst, int weight) {
         Vertex matchSrc = findVertex(src);
         Vertex matchDst = findVertex(dst);
-        if (matchSrc != null && matchDst != null)
+
+        // Bidirectional path/edge
+        if (matchSrc != null && matchDst != null) {
             matchSrc.addEdge(dst, weight);
+            matchDst.addEdge(src, weight);
+        }
+        return;
     }
 
     public void deleteVertex(int key) {
@@ -47,7 +54,6 @@ public class DS {
         j = null;
         while (i != null) {
             if (i.key == key) {
-                i.deleteAllEdge();
                 if (j != null)
                     j.next = i.next;
                 else
@@ -57,11 +63,13 @@ public class DS {
             j = i;
             i = i.next;
         }
+        return;
     }
 
     public void deleteEdge(int src, int dst) {
         Vertex match = findVertex(src);
         if (match != null)
             match.deleteEdge(dst);
+        return;
     }
 }

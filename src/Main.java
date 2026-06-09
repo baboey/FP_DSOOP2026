@@ -9,6 +9,12 @@ public class Main {
 
         graph.printVertex();
         graph.findVertex(1).printEdge();
+        System.out.println("---");
+        graph.findVertex(2).printEdge();
+        System.out.println("---");
+        graph.findVertex(3).printEdge();
+
+        return;
     }
 
     // readFile(mode)
@@ -32,13 +38,15 @@ public class Main {
                 String[] values = ln.split(delimiter);
                 src     = Integer.parseInt(values[0]);
                 dst     = Integer.parseInt(values[1]);
+
                 graph.addVertex(src);
                 graph.addVertex(dst);
-                if      (mode == 1) // time
+
+                if      (mode == 1) // weight as time
                     weight = Integer.parseInt(values[2]);
-                else if (mode == 2) // risk
+                else if (mode == 2) // ~ risk
                     weight = Integer.parseInt(values[3]);
-                else if (mode == 3) // distance
+                else if (mode == 3) // ~ distance
                     weight = Integer.parseInt(values[4]);
                 graph.addEdge(src, dst, weight);
             }
