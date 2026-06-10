@@ -82,9 +82,22 @@ public class DS {
     // Delete edge on other vertex to target vertex
     public void deleteOtherEdge(Vertex target) {
         Edge i = target.ls;
+        Vertex otherVertex = null;
         while (i != null) {
             deleteEdge(target.key, i.dst);
+            otherVertex = findVertex(i.dst);
+            if (otherVertex.ls == null)
+                deleteVertex(otherVertex.key);
             i = target.ls;
+        }
+        return;
+    }
+
+    public void printGraph() {
+        for (Vertex i = ls; i != null; i = i.next) {
+            System.out.println("[" + i.key + "]");
+            i.printEdge();
+            System.out.println("---------");
         }
         return;
     }

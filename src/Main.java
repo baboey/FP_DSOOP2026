@@ -7,18 +7,9 @@ public class Main {
     public void main() {
         generateDataset(5,5,5);
         readDataset(1);
-        graph.deleteVertex(0);
-        graph.printVertex();
-        System.out.println("---");
-//        graph.findVertex(0).printEdge();
-        System.out.println("---");
-        graph.findVertex(1).printEdge();
-        System.out.println("---");
-        graph.findVertex(2).printEdge();
-        System.out.println("---");
-        graph.findVertex(3).printEdge();
-        System.out.println("---");
-        graph.findVertex(4).printEdge();
+        graph.deleteVertex(3);
+//        graph.printVertex();
+        graph.printGraph();
         return;
     }
 
@@ -70,7 +61,10 @@ public class Main {
         String path     = "../data/dataset.csv";
         String src, dst, pdst, weight;
         int rand = 0;
-        nedge = (int) (nedge/nvertex); // totally madeup number for max edge on each vertex
+        if (nedge >= nvertex)
+            nedge = (int) (nedge/nvertex); // totally madeup number for max edge on each vertex
+        else
+            return;
 
         try {
             fw = new FileWriter(path);
