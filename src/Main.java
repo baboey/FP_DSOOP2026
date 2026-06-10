@@ -5,10 +5,20 @@ public class Main {
     DS graph = new DS();
 
     public void main() {
-        generateDataset(25,50,5);
+        generateDataset(5,5,5);
         readDataset(1);
+        graph.deleteVertex(0);
         graph.printVertex();
-        graph.findVertex(24).printEdge();
+        System.out.println("---");
+//        graph.findVertex(0).printEdge();
+        System.out.println("---");
+        graph.findVertex(1).printEdge();
+        System.out.println("---");
+        graph.findVertex(2).printEdge();
+        System.out.println("---");
+        graph.findVertex(3).printEdge();
+        System.out.println("---");
+        graph.findVertex(4).printEdge();
         return;
     }
 

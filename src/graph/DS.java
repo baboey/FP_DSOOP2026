@@ -1,5 +1,6 @@
 package graph;
 import model.Vertex;
+import model.Edge;
 
 public class DS {
     private Vertex ls;
@@ -54,6 +55,7 @@ public class DS {
         j = null;
         while (i != null) {
             if (i.key == key) {
+                deleteOtherEdge(i);
                 if (j != null)
                     j.next = i.next;
                 else
@@ -67,12 +69,25 @@ public class DS {
     }
 
     public void deleteEdge(int src, int dst) {
-        Vertex match = findVertex(src);
-        if (match != null)
-            match.deleteEdge(dst);
+        Vertex matchSrc = findVertex(src);
+        Vertex matchDst = findVertex(dst);
+
+        if (matchSrc != null && matchDst != null) {
+            matchSrc.deleteEdge(dst);
+            matchDst.deleteEdge(src);
+        }
+        return;
+    }
+
+    // Delete edge on other vertex to target vertex
+    public void deleteOtherEdge(Vertex target) {
+        Edge i = target.ls;
+        while (i != null) {
+            deleteEdge(target.key, i.dst);
+            i = target.ls;
+        }
         return;
     }
 
     // TODO: BFS traversal
-    // TODO: bash script to generate 25 vertexes and 40 edges
 }
