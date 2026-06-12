@@ -9,6 +9,11 @@ public class DS {
         ls = null;
     }
 
+    //fungsi getter
+    public model.Vertex getLs() {
+    return this.ls;
+    }
+
     public void addVertex(int key) {
         if (findVertex(key) != null)
             return;

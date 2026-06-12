@@ -1,31 +1,83 @@
 import graph.DS;
+//import tree.DijkstraService; // Memanggil logika Dijkstra kustom kamu
 import java.io.*;
+import java.util.Scanner;
 
 public class Main {
-    DS graph = new DS();
+    // Ubah jadi static agar bisa diakses langsung di method main static
+    static DS graph = new DS(); 
 
-    public void main() {
-        generateDataset(5,5,5);
-        readDataset(1);
-        graph.deleteVertex(3);
-//        graph.printVertex();
-        graph.printGraph();
-        return;
+    public static void main(String[] args) {
+        Main app = new Main();
+        Scanner scanner = new Scanner(System.in);
+
+        // 1. GENERATE & BACA DATASET (Gunakan parameter minimal dosen: 25 node, 45 edge, max bobot 10)
+        System.out.println("⏳ Menggenerate dataset otomatis...");
+        app.generateDataset(25, 45, 10); 
+        
+        // Mode 2 dipilih karena tugas kita mencari jalur dengan RISIKO MINIMUM
+        app.readDataset(2); 
+        System.out.println("✅ Graph berhasil dibangun dari data keselamatan (Risk Mode)!");
+
+        // 2. MENU UTAMA INTERAKTIF
+        while (true) {
+            System.out.println("\n=================================");
+            System.out.println("   SISTEM EVAKUASI DARURAT (POS 2) ");
+            System.out.println("=================================");
+            System.out.println("1. Tampilkan Struktur Peta Gedung (Graph)");
+            System.out.println("2. Cari Rute Evakuasi Teraman (Dijkstra)");
+            System.out.println("3. Simulasi Jalur Blokir / Runtuh (HOTS)");
+            System.out.println("4. Keluar");
+            System.out.print("Pilih menu (1-4): ");
+            
+            int pilihan = scanner.nextInt();
+
+            if (pilihan == 1) {
+                System.out.println("\n--- PETA STRUKTUR GEDUNG (ADJACENCY LIST) ---");
+                graph.printGraph();
+            } 
+            else if (pilihan == 2) {
+                System.out.print("\nMasukkan lokasi posisi Anda saat ini (Angka): ");
+                int posisiKini = scanner.nextInt();
+                System.out.print("Masukkan nomor titik aman / Safe Zone (Angka): ");
+                int titikAman = scanner.nextInt();
+                
+                System.out.println("\n🔄 Menghitung rute evakuasi memproses Min-Heap...");
+                // Memanggil fungsi Dijkstra buatanmu
+                DijkstraService.cariJalurTeraman(graph, posisiKini, titikAman);
+            } 
+            else if (pilihan == 3) {
+                System.out.println("\n--- SIMULASI KEADAAN DARURAT (JALUR TERTUTUP) ---");
+                System.out.print("Masukkan titik asal jalan yang runtuh/terbakar: ");
+                int src = scanner.nextInt();
+                System.out.print("Masukkan titik tujuan jalan yang runtuh/terbakar: ");
+                int dst = scanner.nextInt();
+
+                // Menggunakan fungsi deleteEdge buatan POS 1 secara dinamis
+                graph.deleteEdge(src, dst);
+                System.out.println("⚠️ JALUR ANTARA " + src + " DAN " + dst + " TELAH DITUTUP!");
+                System.out.println("Silakan pilih Menu 2 kembali untuk mencari rute alternatif.");
+            } 
+            else if (pilihan == 4) {
+                System.out.println("Program selesai. Stay safe dan semoga nilai FP kita A!");
+                break;
+            } 
+            else {
+                System.out.println("❌ Pilihan tidak valid!");
+            }
+        }
+        scanner.close();
     }
 
-    // readFile(mode)
-    // Mode 1: time priority
-    // Mode 2: low risk priority
-    // Mode 3: distance priority
+    // Fungsi readDataset bawaan temanmu (tidak diubah, hanya dirapikan jalurnya jika dibutuhkan)
     void readDataset(int mode) {
         FileReader      fr;
         BufferedReader  br;
-        String path     = "../data/dataset.csv",
+        // Menggunakan "data/dataset.csv" agar jalurnya pas dengan struktur root folder project
+        String path     = "data/dataset.csv",
                ln       = null,
                delimiter = ",";
-        int src, dst, 
-            weight = 0; // Needs to be initialized for some reason
-                        //  idk :/
+        int src, dst, weight = 0;
 
         try {
             fr = new FileReader(path);
@@ -33,14 +85,12 @@ public class Main {
 
             br.readLine(); // skips first line
             while ((ln = br.readLine()) != null) {
-                // reads CSV line-by-line
                 String[] values = ln.split(delimiter);
                 src     = Integer.parseInt(values[0]);
                 dst     = Integer.parseInt(values[1]);
                 graph.addVertex(src);
                 graph.addVertex(dst);
 
-                // Only uses one factor to deter the weight
                 if      (mode == 1) // weight as time
                     weight = Integer.parseInt(values[2]);
                 else if (mode == 2) // ~ risk
@@ -49,20 +99,21 @@ public class Main {
                     weight = Integer.parseInt(values[4]);
                 graph.addEdge(src, dst, weight);
             }
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // n for number, r for range
+    // Fungsi generateDataset bawaan temanmu (tidak diubah)
     void generateDataset(int nvertex, int nedge, int rweight) {
         FileWriter      fw;
         BufferedWriter  bw;
-        String path     = "../data/dataset.csv";
+        String path     = "data/dataset.csv";
         String src, dst, pdst, weight;
         int rand = 0;
         if (nedge >= nvertex)
-            nedge = (int) (nedge/nvertex); // totally madeup number for max edge on each vertex
+            nedge = (int) (nedge/nvertex);
         else
             return;
 
@@ -79,7 +130,6 @@ public class Main {
                     rand = (int)(Math.random() * nvertex);
                     dst = Integer.toString(rand);
 
-                    // prevents duplicates
                     if (src.equals(dst) || dst.equals(pdst)) { 
                         --k;
                         continue;
