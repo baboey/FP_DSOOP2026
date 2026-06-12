@@ -11,7 +11,7 @@ public class Main {
         Main app = new Main();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("⏳ Menggenerate dataset otomatis...");
+        System.out.println("Menggenerate dataset otomatis...");
         app.generateDataset(25, 45, 10); 
         
         // Mode 2 dipilih karena tugas kita mencari jalur dengan RISIKO MINIMUM
@@ -41,7 +41,7 @@ public class Main {
                 System.out.print("Masukkan nomor titik aman / Safe Zone (Angka): ");
                 int titikAman = scanner.nextInt();
 
-                System.out.println("\n🔄 Menghitung rute evakuasi memproses Min-Heap...");
+                System.out.println("\nMenghitung rute evakuasi memproses Min-Heap...");
                 DijkstraService.cariJalurTeraman(graph, posisiKini, titikAman);
             } 
             else if (pilihan == 3) {
@@ -52,7 +52,7 @@ public class Main {
                 int dst = scanner.nextInt();
 
                 graph.deleteEdge(src, dst);
-                System.out.println("⚠️ JALUR ANTARA " + src + " DAN " + dst + " TELAH DITUTUP!");
+                System.out.println("JALUR ANTARA " + src + " DAN " + dst + " TELAH DITUTUP!");
                 System.out.println("Silakan pilih Menu 2 kembali untuk mencari rute alternatif.");
             } 
             else if (pilihan == 4) { 
@@ -66,7 +66,7 @@ public class Main {
                 break;
             } 
             else {
-                System.out.println("❌ Pilihan tidak valid!");
+                System.out.println("Pilihan tidak valid!");
             }
         }
         scanner.close();
