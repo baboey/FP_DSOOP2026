@@ -1,5 +1,5 @@
 import graph.DS;
-import tree.DijkstraService; // Memanggil logika Dijkstra kustom kamu
+import tree.DijkstraService; 
 import java.io.*;
 import java.util.Scanner;
 
@@ -11,7 +11,6 @@ public class Main {
         Main app = new Main();
         Scanner scanner = new Scanner(System.in);
 
-        // 1. GENERATE & BACA DATASET (Gunakan parameter minimal dosen: 25 node, 45 edge, max bobot 10)
         System.out.println("⏳ Menggenerate dataset otomatis...");
         app.generateDataset(25, 45, 10); 
         
@@ -19,7 +18,6 @@ public class Main {
         app.readDataset(2); 
         System.out.println("✅ Graph berhasil dibangun dari data keselamatan (Risk Mode)!");
 
-        // 2. MENU UTAMA INTERAKTIF
         while (true) {
             System.out.println("\n=================================");
             System.out.println("   SISTEM EVAKUASI DARURAT (POS 2) ");
@@ -27,7 +25,7 @@ public class Main {
             System.out.println("1. Tampilkan Struktur Peta Gedung (Graph)");
             System.out.println("2. Cari Rute Evakuasi Teraman (Dijkstra)");
             System.out.println("3. Simulasi Jalur Blokir / Runtuh (HOTS)");
-            System.out.println("4. Telusuri Seluruh Area (BFS Traversal)"); // Opsi Baru
+            System.out.println("4. Telusuri Seluruh Area (BFS Traversal)"); 
             System.out.println("5. Keluar");
             System.out.print("Pilih menu (1-5): ");
 
@@ -44,7 +42,6 @@ public class Main {
                 int titikAman = scanner.nextInt();
 
                 System.out.println("\n🔄 Menghitung rute evakuasi memproses Min-Heap...");
-                // Memanggil fungsi Dijkstra buatanmu
                 DijkstraService.cariJalurTeraman(graph, posisiKini, titikAman);
             } 
             else if (pilihan == 3) {
@@ -54,12 +51,11 @@ public class Main {
                 System.out.print("Masukkan titik tujuan jalan yang runtuh/terbakar: ");
                 int dst = scanner.nextInt();
 
-                // Menggunakan fungsi deleteEdge buatan POS 1 secara dinamis
                 graph.deleteEdge(src, dst);
                 System.out.println("⚠️ JALUR ANTARA " + src + " DAN " + dst + " TELAH DITUTUP!");
                 System.out.println("Silakan pilih Menu 2 kembali untuk mencari rute alternatif.");
             } 
-            else if (pilihan == 4) { // Logika Eksekusi BFS
+            else if (pilihan == 4) { 
                 System.out.print("\nMasukkan titik awal penelusuran BFS (Angka): ");
                 int startNode = scanner.nextInt();
                 System.out.println("\nHasil Penelusuran BFS:");
@@ -76,11 +72,9 @@ public class Main {
         scanner.close();
     }
 
-    // Fungsi readDataset bawaan temanmu (tidak diubah, hanya dirapikan jalurnya jika dibutuhkan)
     void readDataset(int mode) {
         FileReader      fr;
         BufferedReader  br;
-        // Menggunakan "data/dataset.csv" agar jalurnya pas dengan struktur root folder project
         String path     = "../data/dataset.csv",
                ln       = null,
                delimiter = ",";
@@ -112,7 +106,6 @@ public class Main {
         }
     }
 
-    // Fungsi generateDataset bawaan temanmu (tidak diubah)
     void generateDataset(int nvertex, int nedge, int rweight) {
         FileWriter      fw;
         BufferedWriter  bw;

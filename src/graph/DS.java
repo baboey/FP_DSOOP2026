@@ -107,7 +107,7 @@ public class DS {
         }
         return;
     }
-    // Implementasi BFS traversal
+
     public void bfsTraversal(int startKey) {
         Vertex startVertex = findVertex(startKey);
         if (startVertex == null) {
@@ -118,7 +118,6 @@ public class DS {
         Set<Integer> visited = new HashSet<>();
         Queue<Vertex> queue = new LinkedList<>();
 
-        // Inisialisasi awal
         visited.add(startVertex.key);
         queue.add(startVertex);
 
@@ -126,8 +125,7 @@ public class DS {
             Vertex current = queue.poll();
             System.out.print(current.key + " ");
 
-            // Telusuri semua edge/tetangga dari vertex saat ini
-            Edge e = current.ls; // current.ls adalah head linked list Edge pada kelas Vertex
+            Edge e = current.ls; 
             while (e != null) {
                 if (!visited.contains(e.dst)) {
                     Vertex neighbor = findVertex(e.dst);
@@ -136,10 +134,9 @@ public class DS {
                         queue.add(neighbor);
                     }
                 }
-                e = e.next; // Lanjut ke edge berikutnya
+                e = e.next; 
             }
         }
         System.out.println();
     }
-    // TODO: BFS traversal
 }
