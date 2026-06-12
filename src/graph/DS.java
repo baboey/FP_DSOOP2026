@@ -1,6 +1,7 @@
 package graph;
 import model.Vertex;
 import model.Edge;
+import java.util.*;
 
 public class DS {
     private Vertex ls;
@@ -11,7 +12,7 @@ public class DS {
 
     //fungsi getter
     public model.Vertex getLs() {
-    return this.ls;
+        return this.ls;
     }
 
     public void addVertex(int key) {
@@ -106,6 +107,39 @@ public class DS {
         }
         return;
     }
+    // Implementasi BFS traversal
+    public void bfsTraversal(int startKey) {
+        Vertex startVertex = findVertex(startKey);
+        if (startVertex == null) {
+            System.out.println("❌ Vertex " + startKey + " tidak ditemukan dalam graph!");
+            return;
+        }
 
+        Set<Integer> visited = new HashSet<>();
+        Queue<Vertex> queue = new LinkedList<>();
+
+        // Inisialisasi awal
+        visited.add(startVertex.key);
+        queue.add(startVertex);
+
+        while (!queue.isEmpty()) {
+            Vertex current = queue.poll();
+            System.out.print(current.key + " ");
+
+            // Telusuri semua edge/tetangga dari vertex saat ini
+            Edge e = current.ls; // current.ls adalah head linked list Edge pada kelas Vertex
+            while (e != null) {
+                if (!visited.contains(e.dst)) {
+                    Vertex neighbor = findVertex(e.dst);
+                    if (neighbor != null) {
+                        visited.add(e.dst);
+                        queue.add(neighbor);
+                    }
+                }
+                e = e.next; // Lanjut ke edge berikutnya
+            }
+        }
+        System.out.println();
+    }
     // TODO: BFS traversal
 }

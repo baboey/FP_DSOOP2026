@@ -1,3 +1,5 @@
+package tree;
+
 import model.HeapNode;
 import model.Vertex;
 import model.Edge;

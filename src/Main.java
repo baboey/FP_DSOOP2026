@@ -1,5 +1,5 @@
 import graph.DS;
-//import tree.DijkstraService; // Memanggil logika Dijkstra kustom kamu
+import tree.DijkstraService; // Memanggil logika Dijkstra kustom kamu
 import java.io.*;
 import java.util.Scanner;
 
@@ -27,9 +27,10 @@ public class Main {
             System.out.println("1. Tampilkan Struktur Peta Gedung (Graph)");
             System.out.println("2. Cari Rute Evakuasi Teraman (Dijkstra)");
             System.out.println("3. Simulasi Jalur Blokir / Runtuh (HOTS)");
-            System.out.println("4. Keluar");
-            System.out.print("Pilih menu (1-4): ");
-            
+            System.out.println("4. Telusuri Seluruh Area (BFS Traversal)"); // Opsi Baru
+            System.out.println("5. Keluar");
+            System.out.print("Pilih menu (1-5): ");
+
             int pilihan = scanner.nextInt();
 
             if (pilihan == 1) {
@@ -41,7 +42,7 @@ public class Main {
                 int posisiKini = scanner.nextInt();
                 System.out.print("Masukkan nomor titik aman / Safe Zone (Angka): ");
                 int titikAman = scanner.nextInt();
-                
+
                 System.out.println("\n🔄 Menghitung rute evakuasi memproses Min-Heap...");
                 // Memanggil fungsi Dijkstra buatanmu
                 DijkstraService.cariJalurTeraman(graph, posisiKini, titikAman);
@@ -58,7 +59,13 @@ public class Main {
                 System.out.println("⚠️ JALUR ANTARA " + src + " DAN " + dst + " TELAH DITUTUP!");
                 System.out.println("Silakan pilih Menu 2 kembali untuk mencari rute alternatif.");
             } 
-            else if (pilihan == 4) {
+            else if (pilihan == 4) { // Logika Eksekusi BFS
+                System.out.print("\nMasukkan titik awal penelusuran BFS (Angka): ");
+                int startNode = scanner.nextInt();
+                System.out.println("\nHasil Penelusuran BFS:");
+                graph.bfsTraversal(startNode);
+            }
+            else if (pilihan == 5) {
                 System.out.println("Program selesai. Stay safe dan semoga nilai FP kita A!");
                 break;
             } 
@@ -74,7 +81,7 @@ public class Main {
         FileReader      fr;
         BufferedReader  br;
         // Menggunakan "data/dataset.csv" agar jalurnya pas dengan struktur root folder project
-        String path     = "data/dataset.csv",
+        String path     = "../data/dataset.csv",
                ln       = null,
                delimiter = ",";
         int src, dst, weight = 0;
@@ -109,7 +116,7 @@ public class Main {
     void generateDataset(int nvertex, int nedge, int rweight) {
         FileWriter      fw;
         BufferedWriter  bw;
-        String path     = "data/dataset.csv";
+        String path     = "../data/dataset.csv";
         String src, dst, pdst, weight;
         int rand = 0;
         if (nedge >= nvertex)
