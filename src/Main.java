@@ -16,7 +16,7 @@ public class Main {
         
         // Mode 2 dipilih karena tugas kita mencari jalur dengan RISIKO MINIMUM
         app.readDataset(2); 
-        System.out.println("✅ Graph berhasil dibangun dari data keselamatan (Risk Mode)!");
+        System.out.println("Graph berhasil dibangun dari data keselamatan (Risk Mode)!");
 
         while (true) {
             System.out.println("\n=================================");
