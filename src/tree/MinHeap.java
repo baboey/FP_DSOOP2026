@@ -1,10 +1,8 @@
-package tree;
-
 import model.HeapNode;
 import java.util.ArrayList;
 
 public class MinHeap {
-    // Array dinamis untuk menyimpan node-node di dalam Heap
+    // Array dinamis untuk menyimpan objek HeapNode (isinya vertex int dan totalRisk int)
     private ArrayList<HeapNode> heap;
 
     // Constructor untuk menginisialisasi Heap kosong
@@ -21,10 +19,10 @@ public class MinHeap {
     // OPERASI UTAMA 1: INSERT (MASUKKAN DATA)
     // ==========================================
     public void insert(HeapNode node) {
-        // 1. Masukkan node baru ke posisi paling akhir (paling bawah di Tree)
+        // 1. Masukkan node baru ke posisi paling akhir array
         heap.add(node);
         
-        // 2. Lakukan Heapify Up untuk menaikkan node ke posisi yang benar
+        // 2. Jalankan logika manual menaikkan node jika risikonya lebih kecil dari Parent
         heapifyUp(heap.size() - 1);
     }
 
@@ -34,15 +32,15 @@ public class MinHeap {
     public HeapNode extractMin() {
         if (heap.isEmpty()) return null;
         
-        // 1. Ambil node paling atas (Root) yang merupakan nilai terkecil
+        // 1. Ambil Root (indeks 0) yang risikonya paling minimal untuk Dijkstra
         HeapNode minNode = heap.get(0);
         
-        // 2. Ambil node paling akhir untuk sementara ditaruh di Root
+        // 2. Ambil elemen terakhir untuk menggantikan posisi Root sementara
         HeapNode lastNode = heap.remove(heap.size() - 1);
         
         if (!heap.isEmpty()) {
             heap.set(0, lastNode);
-            // 3. Turunkan node tersebut ke posisi yang benar agar aturan Min-Heap terjaga
+            // 3. Turunkan node tersebut ke bawah sampai posisinya stabil kembali
             heapifyDown(0);
         }
         return minNode;
@@ -52,44 +50,44 @@ public class MinHeap {
     // LOGIKA PROSES HEAPIFY (PENATAAN ULANG)
     // ==========================================
     
-    // Menaikkan node jika total risikonya lebih kecil dari Parent-nya
+    // Proses manual mengecek ke atas (Parent)
     private void heapifyUp(int index) {
         int parentIndex = (index - 1) / 2;
         
-        // Jika belum sampai Root DAN risiko node saat ini < risiko Parent-nya
+        // Membandingkan totalRisk (int) milik node saat ini dengan Parent-nya
         if (index > 0 && heap.get(index).totalRisk < heap.get(parentIndex).totalRisk) {
-            // Tukar posisi dengan Parent
+            // Tukar posisi jika melanggar aturan Min-Heap
             swap(index, parentIndex);
-            // Rekursif: cek lagi ke atas
+            // Cek terus ke atas secara rekursif
             heapifyUp(parentIndex);
         }
     }
 
-    // Menurunkan node jika total risikonya lebih besar dari anak-anaknya
+    // Proses manual mengecek ke bawah (Children)
     private void heapifyDown(int index) {
         int leftChild = 2 * index + 1;
         int rightChild = 2 * index + 2;
         int smallest = index;
 
-        // Cek apakah anak kiri lebih kecil risikonya
+        // Validasi apakah anak kiri ada dan memiliki totalRisk lebih kecil
         if (leftChild < heap.size() && heap.get(leftChild).totalRisk < heap.get(smallest).totalRisk) {
             smallest = leftChild;
         }
 
-        // Cek apakah anak kanan lebih kecil risikonya
+        // Validasi apakah anak kanan ada dan memiliki totalRisk lebih kecil
         if (rightChild < heap.size() && heap.get(rightChild).totalRisk < heap.get(smallest).totalRisk) {
             smallest = rightChild;
         }
 
-        // Jika salah satu anaknya ternyata lebih kecil, lakukan penukaran
+        // Jika ditemukan anak yang totalRisk-nya lebih kecil dari parent saat ini
         if (smallest != index) {
             swap(index, smallest);
-            // Rekursif: cek lagi ke bawah
+            // Turunkan terus ke bawah secara rekursif
             heapifyDown(smallest);
         }
     }
 
-    // Fungsi pembantu untuk menukar posisi dua elemen di dalam ArrayList
+    // Fungsi pembantu untuk menukar elemen di dalam ArrayList
     private void swap(int i, int j) {
         HeapNode temp = heap.get(i);
         heap.set(i, heap.get(j));
