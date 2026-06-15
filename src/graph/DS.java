@@ -111,7 +111,7 @@ public class DS {
     public void bfsTraversal(int startKey) {
         Vertex startVertex = findVertex(startKey);
         if (startVertex == null) {
-            System.out.println("❌ Vertex " + startKey + " tidak ditemukan dalam graph!");
+            System.out.println("Vertex " + startKey + " tidak ditemukan dalam graph!");
             return;
         }
 
@@ -138,5 +138,47 @@ public class DS {
             }
         }
         System.out.println();
+    }
+
+    // 1. Fungsi untuk Mengubah Bobot Koridor 
+    public void updateEdgeWeight(int src, int dst, int newWeight) {
+        Vertex matchSrc = findVertex(src);
+        Vertex matchDst = findVertex(dst);
+
+        if (matchSrc != null && matchDst != null) {
+            // Ubah bobot di sisi Source menuju Destination
+            for (model.Edge e = matchSrc.ls; e != null; e = e.next) {
+                if (e.dst == dst) {
+                    e.weight = newWeight;
+                    break;
+                }
+            }
+            // Ubah bobot di sisi Destination menuju Source (Bidirectional)
+            for (model.Edge e = matchDst.ls; e != null; e = e.next) {
+                if (e.dst == src) {
+                    e.weight = newWeight;
+                    break;
+                }
+            }
+            System.out.println("Bobot jalur antara " + src + " dan " + dst + " berhasil diubah menjadi: " + newWeight);
+        } else {
+            System.out.println("Gagal mengubah bobot. Ruangan tidak ditemukan!");
+        }
+    }
+
+    // 2. Fungsi untuk Mencari Ruangan dengan Prefix
+    public void searchVertexWithPrefix(String prefix) {
+        System.out.println("Hasil pencarian ruangan dengan awalan '" + prefix + "':");
+        boolean ditemukan = false;
+        for (Vertex i = ls; i != null; i = i.next) {
+            String currentKeyStr = Integer.toString(i.key);
+            if (currentKeyStr.startsWith(prefix)) {
+                System.out.println("- Ruangan [ID: " + i.key + "]");
+                ditemukan = true;
+            }
+        }
+        if (!ditemukan) {
+            System.out.println("Tidak ada ruangan dengan awalan tersebut.");
+        }
     }
 }
