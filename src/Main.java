@@ -26,9 +26,9 @@ public class Main {
             System.out.println("2. Cari Rute Evakuasi Teraman (Dijkstra - Mode Cerdas)");
             System.out.println("3. Simulasi Jalur Blokir / Runtuh (Hapus Edge)");
             System.out.println("4. Telusuri Seluruh Area (BFS Traversal)"); 
-            System.out.println("5. Hapus Ruangan (Delete Vertex)"); // BARU
-            System.out.println("6. Ubah Bobot Koridor (Update Edge)"); // BARU
-            System.out.println("7. Cari Ruangan dengan Prefix"); // BARU
+            System.out.println("5. Hapus Ruangan (Delete Vertex)"); 
+            System.out.println("6. Ubah Bobot Koridor (Update Edge)"); 
+            System.out.println("7. Cari Ruangan dengan Prefix"); 
             System.out.println("8. Keluar");
             System.out.print("Pilih menu (1-8): ");
 
