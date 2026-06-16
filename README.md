@@ -48,3 +48,11 @@ weight = risk + congestion + smoke_level
 2. Pastikan Java sudah terinstall
 3. Jalankan program melalui file: `Main.java`
 4. Pilih menu sesuai kebutuhan.
+
+### Compile Manual 
+
+bash```
+
+E:\FP Strukdat\FP_DSOOP2026> javac src/model/*.java src/graph/*.java src/tree/*.java src/Main.java && java -cp src Main
+
+```

@@ -65,7 +65,7 @@ public class DijkstraService {
             curr = parentNode.get(curr);
         }
         
-        System.out.print("Rute Evakuasi Teraman (Dijkstra): ");
+        System.out.print("Rute Evakuasi Teraman: ");
         while (!path.isEmpty()) {
             System.out.print(path.pop() + (path.size() > 0 ? " -> " : ""));
         }
