@@ -3,7 +3,6 @@
 | Nama                          | NRP         |
 | --:                           | :--         |
 | Sean Arthur Tamajaya          | 5027251050  |
-| Bima Aria Perthama            | 5027241060  |
 | Afriezal Suryapraba Laiasach  | 5027251096  |
 | Dian Hanna Simanjuntak        | 5027251116  |
 | Thio Billy Amansyah           | 5027231007  |
@@ -51,7 +50,7 @@ weight = risk + congestion + smoke_level
 
 ### Compile Manual 
 
-bash```
+```bash
 
 E:\FP Strukdat\FP_DSOOP2026> javac src/model/*.java src/graph/*.java src/tree/*.java src/Main.java && java -cp src Main
 
