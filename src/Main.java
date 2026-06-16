@@ -12,7 +12,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Menggenerate dataset otomatis...");
-        app.generateDataset(25, 45, 10); 
+        app.generateDataset(25, 50, 10); 
         
         // DIUBAH: Menggunakan Mode 6 (Gabungan Risiko + Kepadatan + Asap)
         app.readDataset(6); 
@@ -22,12 +22,12 @@ public class Main {
             System.out.println("=================================");
             System.out.println("   SISTEM EVAKUASI DARURAT (POS 2) ");
             System.out.println("=================================");
-            System.out.println("1. Tampilkan Struktur Peta Gedung (Graph)");
-            System.out.println("2. Cari Rute Evakuasi Teraman (Dijkstra - Mode Cerdas)");
-            System.out.println("3. Simulasi Jalur Blokir / Runtuh (Hapus Edge)");
-            System.out.println("4. Telusuri Seluruh Area (BFS Traversal)"); 
-            System.out.println("5. Hapus Ruangan (Delete Vertex)"); 
-            System.out.println("6. Ubah Bobot Koridor (Update Edge)"); 
+            System.out.println("1. Tampilkan Struktur Peta Gedung");
+            System.out.println("2. Cari Rute Evakuasi Teraman");
+            System.out.println("3. Simulasi Jalur Blokir / Runtuh");
+            System.out.println("4. Telusuri Seluruh Area"); 
+            System.out.println("5. Hapus Ruangan"); 
+            System.out.println("6. Ubah Bobot Koridor"); 
             System.out.println("7. Cari Ruangan dengan Prefix"); 
             System.out.println("8. Keluar");
             System.out.print("Pilih menu (1-8): ");
@@ -44,7 +44,7 @@ public class Main {
                 System.out.print("Masukkan nomor titik aman / Safe Zone (Angka): ");
                 int titikAman = scanner.nextInt();
 
-                System.out.println("\nMenghitung rute evakuasi memproses Min-Heap...");
+                System.out.println("\nMenghitung rute evakuasi...");
                 DijkstraService.cariJalurTeraman(graph, posisiKini, titikAman);
             } 
             else if (pilihan == 3) {
