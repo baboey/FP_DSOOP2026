@@ -51,7 +51,7 @@ weight = risk + congestion + smoke_level
 
 ### Compile Manual 
 
-bash```
+```bash
 
 E:\FP Strukdat\FP_DSOOP2026> javac src/model/*.java src/graph/*.java src/tree/*.java src/Main.java && java -cp src Main
 
